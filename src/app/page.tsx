@@ -103,7 +103,7 @@ export default function Home() {
             className="mt-16 max-w-3xl mx-auto text-center bg-gray-800/50 p-8 rounded-lg"
           >
             <blockquote className="text-2xl text-white italic">
-              "Success is not final, failure is not fatal: It is the courage to continue that counts."
+              &ldquo;Success is not final, failure is not fatal: It is the courage to continue that counts.&rdquo;
             </blockquote>
             <p className="mt-4 text-gray-300">- Winston Churchill</p>
           </motion.div>
@@ -123,9 +123,9 @@ export default function Home() {
                 and this passion has only grown stronger over time.
               </p>
               <p className="text-xl text-white leading-relaxed mt-4">
-                Currently pursuing my a bachelor's degree in Computer Science at Ohio University, I am constantly expanding my knowledge and skills 
+                Currently pursuing my bachelor&apos;s degree in Computer Science at Ohio University, I am constantly expanding my knowledge and skills 
                 in software development. I enjoy tackling complex problems and turning them into elegant solutions. 
-                When I'm not coding, you can find me working on personal projects or exploring new technologies.
+                When I&apos;m not coding, you can find me working on personal projects or exploring new technologies.
               </p>
             </div>
           </motion.div>
