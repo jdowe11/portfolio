@@ -1,103 +1,136 @@
+'use client';
+
 import Image from "next/image";
+import { EnvelopeIcon, GithubIcon, LinkedInIcon } from '@/components/Icons';
+import Navbar from '@/components/Navbar';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <Navbar />
+      <div className="pt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col md:flex-row items-center justify-between gap-16"
+          >
+            <div className="w-full md:w-1/2 flex justify-end">
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                className="relative w-96 h-96 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-[#004C00] shadow-2xl shadow-[#004C00]/20 hover:shadow-[#004C00]/40 transition-shadow duration-300"
+              >
+                <Image
+                  src="/profile.jpg"
+                  alt="Jayden Dowell"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </motion.div>
+            </div>
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="w-full md:w-1/2 space-y-8"
+            >
+              <div className="space-y-4">
+                <h1 className="text-6xl font-bold text-white tracking-tight">
+                  Jayden Dowell
+                </h1>
+                <p className="text-2xl text-gray-300 font-light">
+                  Full Stack Developer/Linux Enthusiast
+                </p>
+              </div>
+              <div className="space-y-6">
+                <motion.div 
+                  whileHover={{ x: 10 }}
+                  className="flex items-center space-x-4 group"
+                >
+                  <div className="p-3 bg-gray-800/50 rounded-full group-hover:bg-[#004C00] transition-colors duration-300">
+                    <EnvelopeIcon className="h-7 w-7 text-[#004C00] group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <a href="mailto:jaymdowell@gmail.com" className="text-xl text-gray-300 hover:text-white transition-colors">
+                    jaymdowell@gmail.com
+                  </a>
+                </motion.div>
+                <motion.div 
+                  whileHover={{ x: 10 }}
+                  className="flex items-center space-x-4 group"
+                >
+                  <div className="p-3 bg-gray-800/50 rounded-full group-hover:bg-[#004C00] transition-colors duration-300">
+                    <GithubIcon className="h-7 w-7 text-[#004C00] group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <a
+                    href="https://github.com/jdowe11"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xl text-gray-300 hover:text-white transition-colors"
+                  >
+                    github.com/jdowe11
+                  </a>
+                </motion.div>
+                <motion.div 
+                  whileHover={{ x: 10 }}
+                  className="flex items-center space-x-4 group"
+                >
+                  <div className="p-3 bg-gray-800/50 rounded-full group-hover:bg-[#004C00] transition-colors duration-300">
+                    <LinkedInIcon className="h-7 w-7 text-[#004C00] group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <a
+                    href="https://linkedin.com/in/jaydendowell"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xl text-gray-300 hover:text-white transition-colors"
+                  >
+                    linkedin.com/in/jaydendowell
+                  </a>
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* Quote Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-16 max-w-3xl mx-auto text-center bg-gray-800/50 p-8 rounded-lg"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <blockquote className="text-2xl text-white italic">
+              "Success is not final, failure is not fatal: It is the courage to continue that counts."
+            </blockquote>
+            <p className="mt-4 text-gray-300">- Winston Churchill</p>
+          </motion.div>
+
+          {/* About Me Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-16 max-w-4xl mx-auto bg-gray-800/50 p-8 rounded-lg"
           >
-            Read our docs
-          </a>
+            <h2 className="text-3xl font-bold text-white mb-6">About Me</h2>
+            <div className="prose prose-invert max-w-none">
+              <p className="text-xl text-white leading-relaxed">
+                I am a passionate Full Stack Developer with a strong foundation in both front-end and back-end technologies. 
+                My journey in programming began with a fascination for creating things that people can interact with, 
+                and this passion has only grown stronger over time.
+              </p>
+              <p className="text-xl text-white leading-relaxed mt-4">
+                Currently pursuing my a bachelor's degree in Computer Science at Ohio University, I am constantly expanding my knowledge and skills 
+                in software development. I enjoy tackling complex problems and turning them into elegant solutions. 
+                When I'm not coding, you can find me working on personal projects or exploring new technologies.
+              </p>
+            </div>
+          </motion.div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 }
