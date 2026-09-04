@@ -1,12 +1,15 @@
-'use client';
+"use client";
+
+import React from "react";
+import { cn } from "@/utils/cn";
 
 interface LinkedInIconProps {
   className?: string;
 }
 
-export const LinkedInIcon = ({ className = '' }: LinkedInIconProps) => (
+export const LinkedInIcon = ({ className }: LinkedInIconProps) => (
   <svg
-    className={`h-7 w-7 ${className}`}
+    className={cn("w-6 h-6", className)}
     fill="currentColor"
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -17,4 +20,4 @@ export const LinkedInIcon = ({ className = '' }: LinkedInIconProps) => (
       clipRule="evenodd"
     />
   </svg>
-); 
+);

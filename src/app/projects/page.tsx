@@ -1,85 +1,63 @@
-'use client';
+import React from "react";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ProjectCard from "@/components/projects/ProjectCard";
+import { PROJECTS } from "@/constants/projects";
+import { CommandLineIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-import Image from 'next/image';
-import Navbar from '@/components/Navbar';
-import { motion } from 'framer-motion';
-
-const projects = [
-  {
-    title: 'IWC++',
-    description: 'IWC++ is a runtime language that is interpreted with a program build in c++ I am currently working on.',
-    technologies: ['C++', 'CMake'],
-    image: '/projects/IWC++.png',
-    link: 'https://github.com/jdowe11/IWCPlusPlus',
-  },
-  {
-    title: '2d-val',
-    description: 'A 2d version of the game Valorant, built with the Godot Game Engine.',
-    technologies: ['Godot', 'GDScript'],
-    image: '/projects/2d-val.png',
-    link: 'https://github.com/jdowe11/2d-val',
-  },
-  // Add more projects as needed
-];
+export const metadata = {
+  title: "Projects | Jayden Dowell",
+  description:
+    "Explore projects engineered by Jayden Dowell — including Sentry (End-to-End Encrypted Messenger), IWC++ language runtime, and 2d-val.",
+};
 
 export default function Projects() {
   return (
-    <main className="min-h-screen bg-gray-900">
+    <main className="min-h-screen text-[#F3F4F6] selection:bg-[#059669]/30 selection:text-[#A7F3D0]">
       <Navbar />
-      <div className="pt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold text-white mb-12">Projects</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-[#004C00]"
-              >
-                <div className="relative h-64 w-full bg-gray-700">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-contain p-4"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/projects/placeholder.png';
-                    }}
-                  />
-                </div>
-                <div className="p-6">
-                  <h2 className="text-xl font-semibold text-white mb-2">
-                    {project.title}
-                  </h2>
-                  <p className="text-gray-300 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-[#004C00] text-white rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#004C00] hover:text-white font-medium transition-colors"
-                  >
-                    View Project →
-                  </a>
-                </div>
-              </motion.div>
-            ))}
+
+      <div className="pt-28 pb-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Terminal Header & Breadcrumbs */}
+        <div className="space-y-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-xs font-mono text-[#9CA3AF] hover:text-[#10B981] transition-colors"
+          >
+            <ArrowLeftIcon className="w-3.5 h-3.5" />
+            <span>cd ~ (Return to Home)</span>
+          </Link>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#1E2533] pb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#161B24] border border-[#1E2533] font-mono text-xs text-[#10B981] mb-2">
+                <CommandLineIcon className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>~/projects (git:main)</span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                Featured Projects
+              </h1>
+              <p className="text-sm text-[#D1D5DB] mt-2 max-w-2xl">
+                A showcase of some of my personal projects and software.
+              </p>
+            </div>
           </div>
         </div>
+
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {PROJECTS.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+            />
+          ))}
+        </div>
+
+        {/* Reusable Terminal Footer */}
+        <Footer />
       </div>
     </main>
   );
-} 
+}
