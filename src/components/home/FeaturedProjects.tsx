@@ -15,7 +15,7 @@ export default function FeaturedProjects() {
       <div className="flex items-center justify-between">
         <div>
           <div className="text-xs font-mono text-[#10B981] tracking-wider uppercase mb-1">
-            // WORK REPOSITORY
+            {"// WORK REPOSITORY"}
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
             Featured Projects

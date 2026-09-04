@@ -24,7 +24,7 @@ export default function SkillsSection() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <div className="text-xs font-mono text-[#10B981] tracking-wider uppercase mb-1">
-            // TECHNICAL EXPERTISE
+            {"// TECHNICAL EXPERTISE"}
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
             Skills &amp; Technology Stack
