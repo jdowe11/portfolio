@@ -1,24 +1,18 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Project } from "@/types/project";
 import { GithubIcon } from "@/components/Icons";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
+  index?: number;
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
+export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="group rounded-xl bg-[#161B24] border border-[#1E2533] hover:border-[#059669]/60 shadow-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-[0_8px_30px_rgba(5,150,105,0.15)]"
+    <article
+      className="group rounded-xl bg-[#161B24] border border-[#1E2533] hover:border-[#059669]/60 shadow-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-[0_8px_30px_rgba(5,150,105,0.15)] hover:-translate-y-1"
     >
       {/* Image Preview Container */}
       <div className="relative h-64 w-full bg-[#0C0F14] border-b border-[#1E2533] p-4 flex items-center justify-center overflow-hidden">
@@ -79,6 +73,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           </div>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
