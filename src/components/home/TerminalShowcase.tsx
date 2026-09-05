@@ -118,7 +118,7 @@ export default function TerminalShowcase() {
                     </div>
                     <div className="break-words">
                       <span className="text-cyan-400 font-semibold">Environment:</span>{" "}
-                      Linux &amp; macOS
+                      Linux, macOS, &amp; Windows
                     </div>
                     <div className="break-words">
                       <span className="text-cyan-400 font-semibold">Status:</span>{" "}

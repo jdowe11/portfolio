@@ -18,7 +18,20 @@ export default function Navbar() {
   };
 
   const isHome = pathname === "/";
+  const isTerminal = pathname.startsWith("/terminal");
   const isProjects = pathname.startsWith("/projects");
+
+  const currentPathDisplay = isProjects
+    ? "~/projects"
+    : isTerminal
+    ? "~/terminal"
+    : "~";
+
+  const promptDirDisplay = isProjects
+    ? "projects"
+    : isTerminal
+    ? "terminal"
+    : "~";
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-6 pt-3 pointer-events-none">
@@ -39,19 +52,16 @@ export default function Navbar() {
               className="w-3 h-3 rounded-full bg-[#10B981] inline-block shadow-sm transition-opacity hover:opacity-80 cursor-pointer"
               title="Maximize"
             />
-            <span className="hidden sm:inline-block ml-2 text-[#6B7280]">
-              terminal — zsh — 80×24
-            </span>
           </div>
 
           {/* Central Host / Session Indicator */}
-          <div className="text-[#9CA3AF] font-medium tracking-tight flex items-center gap-1.5 truncate max-w-[200px] sm:max-w-none">
+          <div className="text-[#9CA3AF] font-medium tracking-tight flex items-center gap-1.5 truncate max-w-[180px] sm:max-w-none">
             <span className="text-[#10B981]">jayden</span>
             <span className="text-[#6B7280]">@</span>
             <span className="text-gray-300">{SITE_CONFIG.hostname}</span>
             <span className="text-[#6B7280]">:</span>
             <span className="text-cyan-400 font-semibold truncate">
-              {isProjects ? "~/projects" : "~"}
+              {currentPathDisplay}
             </span>
           </div>
 
@@ -64,107 +74,168 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Oh My Zsh Prompt & Interactive Navigation */}
-        <div className="px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 font-mono text-sm">
-          {/* Oh My Zsh classic Prompt (robbyrussell style) */}
-          <div className="flex items-center space-x-2 select-none overflow-x-auto scrollbar-none py-0.5">
+        {/* Prompt Row + Right-Aligned Contacts */}
+        <div className="px-3 sm:px-4 py-2 flex items-center justify-between gap-2 font-mono text-xs sm:text-sm">
+          {/* Oh My Zsh Prompt */}
+          <div className="flex items-center space-x-1.5 select-none overflow-x-auto scrollbar-none py-0.5 min-w-0">
             {/* Emerald Arrow */}
-            <span className="text-[#10B981] font-bold text-base leading-none">
+            <span className="text-[#10B981] font-bold text-sm sm:text-base leading-none">
               ➜
             </span>
 
             {/* Current Directory */}
-            <span className="text-cyan-400 font-semibold tracking-wide">
-              {isProjects ? "projects" : "~"}
+            <span className="text-cyan-400 font-semibold tracking-wide truncate">
+              {promptDirDisplay}
             </span>
 
-            {/* Git Branch & Status */}
-            <span className="text-[#9CA3AF] flex items-center gap-1 text-xs sm:text-sm">
+            {/* Git Branch & Status with ❯ Symbol */}
+            <span className="text-[#9CA3AF] flex items-center gap-0.5 text-xs whitespace-nowrap">
               <span className="text-[#6B7280]">git:(</span>
               <span className="text-[#EF4444] font-semibold">main</span>
               <span className="text-[#6B7280]">)</span>
-              <span className="text-[#10B981] font-bold" title="Clean working tree">
-                ✔
+              <span className="text-[#10B981] font-bold" title="Git status: clean">
+                ❯
               </span>
             </span>
 
-            {/* Pulsing Command Cursor */}
-            <span className="text-[#10B981] animate-pulse font-bold ml-0.5 hidden xs:inline">
+            {/* Pulsing Cursor */}
+            <span className="text-[#10B981] animate-pulse font-bold ml-0.5">
               _
             </span>
           </div>
 
-          {/* Navigation Commands & Quick Shell Links */}
-          <nav className="flex items-center space-x-1.5 sm:space-x-2 text-xs sm:text-sm">
-            <Link
-              href="/"
-              className={cn(
-                "px-2.5 sm:px-3 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-1.5 border",
-                isHome
-                  ? "bg-[#161B24] text-[#10B981] border-[#059669]/50 shadow-[0_0_12px_rgba(5,150,105,0.2)] font-semibold"
-                  : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-[#161B24]/70 hover:border-[#1E2533]"
-              )}
-            >
-              <span className="text-[#059669] select-none">$</span>
-              <span>cd ~</span>
-            </Link>
+          {/* Right-Aligned Group: Desktop Navigation + Contacts */}
+          <div className="flex items-center space-x-1 sm:space-x-1.5 shrink-0 ml-auto">
+            {/* Desktop Navigation Links (Hidden on Mobile) */}
+            <nav className="hidden md:flex items-center space-x-1.5 text-xs sm:text-sm mr-1">
+              <Link
+                href="/"
+                className={cn(
+                  "px-2.5 py-1 rounded-lg transition-all duration-200 flex items-center gap-1.5 border",
+                  isHome
+                    ? "bg-[#161B24] text-[#10B981] border-[#059669]/50 shadow-[0_0_12px_rgba(5,150,105,0.2)] font-semibold"
+                    : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-[#161B24]/70 hover:border-[#1E2533]"
+                )}
+              >
+                <span className="text-[#059669] select-none">$</span>
+                <span>cd ~</span>
+              </Link>
 
-            <Link
-              href="/projects"
-              className={cn(
-                "px-2.5 sm:px-3 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-1.5 border",
-                isProjects
-                  ? "bg-[#161B24] text-[#10B981] border-[#059669]/50 shadow-[0_0_12px_rgba(5,150,105,0.2)] font-semibold"
-                  : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-[#161B24]/70 hover:border-[#1E2533]"
-              )}
-            >
-              <span className="text-[#059669] select-none">$</span>
-              <span>projects</span>
-            </Link>
+              <Link
+                href="/terminal"
+                className={cn(
+                  "px-2.5 py-1 rounded-lg transition-all duration-200 flex items-center gap-1.5 border",
+                  isTerminal
+                    ? "bg-[#161B24] text-[#10B981] border-[#059669]/50 shadow-[0_0_12px_rgba(5,150,105,0.2)] font-semibold"
+                    : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-[#161B24]/70 hover:border-[#1E2533]"
+                )}
+              >
+                <span className="text-[#059669] select-none">$</span>
+                <span>terminal</span>
+              </Link>
 
-            {/* Separator */}
-            <span className="text-[#1E2533] px-0.5 select-none">|</span>
+              <Link
+                href="/projects"
+                className={cn(
+                  "px-2.5 py-1 rounded-lg transition-all duration-200 flex items-center gap-1.5 border",
+                  isProjects
+                    ? "bg-[#161B24] text-[#10B981] border-[#059669]/50 shadow-[0_0_12px_rgba(5,150,105,0.2)] font-semibold"
+                    : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-[#161B24]/70 hover:border-[#1E2533]"
+                )}
+              >
+                <span className="text-[#059669] select-none">$</span>
+                <span>projects</span>
+              </Link>
 
-            {/* GitHub Quick Link */}
-            <a
-              href={SITE_CONFIG.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub Profile"
-              className="p-1.5 text-[#9CA3AF] hover:text-[#10B981] hover:bg-[#161B24] rounded-lg transition-colors border border-transparent hover:border-[#1E2533]"
-              title="GitHub"
-            >
-              <GithubIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-            </a>
+              {/* Desktop Separator */}
+              <span className="text-[#1E2533] px-0.5 select-none">|</span>
+            </nav>
 
-            {/* LinkedIn Quick Link */}
-            <a
-              href={SITE_CONFIG.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn Profile"
-              className="p-1.5 text-[#9CA3AF] hover:text-[#10B981] hover:bg-[#161B24] rounded-lg transition-colors border border-transparent hover:border-[#1E2533]"
-              title="LinkedIn"
-            >
-              <LinkedInIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-            </a>
+            {/* Contact Icons (Visible on Both Mobile & Desktop) */}
+            <div className="flex items-center space-x-1">
+              {/* GitHub */}
+              <a
+                href={SITE_CONFIG.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Profile"
+                className="p-1.5 text-[#9CA3AF] hover:text-[#10B981] hover:bg-[#161B24] rounded-lg transition-colors border border-transparent hover:border-[#1E2533]"
+                title="GitHub"
+              >
+                <GithubIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+              </a>
 
-            {/* Email / Copy Quick Action */}
-            <button
-              onClick={copyEmail}
-              aria-label="Copy Email"
-              className="p-1.5 text-[#9CA3AF] hover:text-[#10B981] hover:bg-[#161B24] rounded-lg transition-colors border border-transparent hover:border-[#1E2533] relative group"
-              title={`Copy ${SITE_CONFIG.email}`}
-            >
-              <EnvelopeIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-              {copied && (
-                <span className="absolute -bottom-8 right-0 bg-[#059669] text-white text-[10px] font-sans px-2 py-0.5 rounded shadow-md whitespace-nowrap animate-in fade-in zoom-in-95">
-                  Copied!
-                </span>
-              )}
-            </button>
-          </nav>
+              {/* LinkedIn */}
+              <a
+                href={SITE_CONFIG.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
+                className="p-1.5 text-[#9CA3AF] hover:text-[#10B981] hover:bg-[#161B24] rounded-lg transition-colors border border-transparent hover:border-[#1E2533]"
+                title="LinkedIn"
+              >
+                <LinkedInIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+              </a>
+
+              {/* Email / Copy Action */}
+              <button
+                onClick={copyEmail}
+                aria-label="Copy Email"
+                className="p-1.5 text-[#9CA3AF] hover:text-[#10B981] hover:bg-[#161B24] rounded-lg transition-colors border border-transparent hover:border-[#1E2533] relative group"
+                title={`Copy ${SITE_CONFIG.email}`}
+              >
+                <EnvelopeIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                {copied && (
+                  <span className="absolute -bottom-8 right-0 bg-[#059669] text-white text-[10px] font-sans px-2 py-0.5 rounded shadow-md whitespace-nowrap animate-in fade-in zoom-in-95 z-50">
+                    Copied!
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
+
+        {/* Mobile Navigation Row (Placed Below on Mobile Viewports) */}
+        <nav className="md:hidden px-2.5 pb-2 pt-1 border-t border-[#1E2533]/70 grid grid-cols-3 gap-1.5 font-mono text-[11px] text-center">
+          <Link
+            href="/"
+            className={cn(
+              "py-1.5 px-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-1 border",
+              isHome
+                ? "bg-[#161B24] text-[#10B981] border-[#059669]/50 shadow-[0_0_8px_rgba(5,150,105,0.2)] font-semibold"
+                : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-[#161B24]/70"
+            )}
+          >
+            <span className="text-[#059669]">$</span>
+            <span>cd ~</span>
+          </Link>
+
+          <Link
+            href="/terminal"
+            className={cn(
+              "py-1.5 px-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-1 border",
+              isTerminal
+                ? "bg-[#161B24] text-[#10B981] border-[#059669]/50 shadow-[0_0_8px_rgba(5,150,105,0.2)] font-semibold"
+                : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-[#161B24]/70"
+            )}
+          >
+            <span className="text-[#059669]">$</span>
+            <span>terminal</span>
+          </Link>
+
+          <Link
+            href="/projects"
+            className={cn(
+              "py-1.5 px-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-1 border",
+              isProjects
+                ? "bg-[#161B24] text-[#10B981] border-[#059669]/50 shadow-[0_0_8px_rgba(5,150,105,0.2)] font-semibold"
+                : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-[#161B24]/70"
+            )}
+          >
+            <span className="text-[#059669]">$</span>
+            <span>projects</span>
+          </Link>
+        </nav>
       </div>
     </header>
   );

@@ -45,7 +45,7 @@ export default function HeroSection() {
               </span>
             </h1>
             <p className="text-xl sm:text-2xl text-gray-300 font-light font-mono flex items-center gap-2">
-              <span className="text-[#10B981] font-bold">➜</span>
+              <span className="text-[#10B981] font-bold">❯</span>
               <span>{SITE_CONFIG.role}</span>
             </p>
           </div>
